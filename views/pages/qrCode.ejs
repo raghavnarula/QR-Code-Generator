@@ -1,0 +1,88 @@
+<%-include('../partials/_header.ejs')%>
+<h1>Qr Code Generated for the Details:</h1>
+
+<div class="row" style="margin: 50px 5px">
+  <div class="col-sm-6 col-lg-6">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col-sm">Type</th>
+          <th scope="col-sm">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Date Created:</td>
+          <td><%=data["qr_date_created"]%></td>
+        </tr>
+        <tr>
+          <td>Name of The Product:</td>
+          <td><%=data["name_of_product"]%></td>
+        </tr>
+        <tr>
+          <td>Batch Number:</td>
+          <td><%=data["batch_number"]%></td>
+        </tr>
+        <tr>
+          <td>Manufacturing Date:</td>
+          <td><%=data["manufacturing_date"]%></td>
+        </tr>
+        <tr>
+          <td>Number of Container:</td>
+          <td><%=data["number_of_container"]%></td>
+        </tr>
+        <tr>
+          <td>Expiry Date:</td>
+          <td><%=data["expiry_date"]%></td>
+        </tr>
+        <tr>
+          <td>Gross Weight:</td>
+          <td><%=data["gross_weight"]%> <b>kg</b></td>
+        </tr>
+        <tr>
+          <td>Tare Weight:</td>
+          <td><%=data["tare_weight"]%> <b>kg</b></td>
+        </tr>
+        <tr>
+          <td>Net Weight:</td>
+          <td><%=data["net_weight"]%> <b>kg</b></td>
+        </tr>
+        <tr>
+          <td>Manufacturing Licence Number:</td>
+          <td><%=data["manufacturing_licence_number"]%></td>
+        </tr>
+
+        <tr>
+          <td>Origin:</td>
+          <td><%=data["origin"]%></td>
+        </tr>
+
+        <tr>
+          <td>Storage Condition:</td>
+          <td><%=data["storage_condition"]%></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-sm-6 col-lg-6">
+    <img src="<%=data['base_64']%>" id="qr_image" />
+    <br />
+    <a href="<%=data['base_64']%>" download ><button class="btn btn-primary">Download QR</button></a>
+    <a href="#" onclick="PrintImage('<%=data['base_64']%>'); return false;"><button id="printImage" class="btn btn-primary">Print QR</button></a>
+    <br />
+  </div>
+</div>
+<script>
+    function ImageToPrint(source){
+        return(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Document</title></head><body><img src=${source} style="margin:200px"></body></html>`)}
+    function PrintImage(source) {
+        Pagelink = "about:blank";
+        var pwa = window.open(Pagelink, "_new");
+        pwa.document.open();
+        pwa.document.write(ImageToPrint(source));
+        pwa.print();
+        pwa.document.close();
+    }
+</script>
+<%- include('../partials/_footer.ejs')%>
